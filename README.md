@@ -132,3 +132,25 @@ restore script in `index.html`. If you set `BASE_URL` to `/`, also change
 
 `.nvmrc` pins Node 22. If your environment reports unsupported-engine warnings,
 upgrade to Node 22.13+ or 24.
+
+## Deploying to Vercel
+
+The site is also deployed to Vercel (project `seronzs-projects/engineering-portofolio`),
+connected to this GitHub repository so pushes to `main` deploy to production.
+
+- `vercel.json` sets the Vite framework preset, the `dist` output directory, and
+  a catch-all rewrite to `/index.html` so client-side routes resolve on deep links.
+- On Vercel the build runs with the default Vite base path (`/`), so do **not**
+  set `BASE_URL` there — that variable is only used by the GitHub Pages workflow.
+- Contact links come from the `VITE_CONTACT_GITHUB`, `VITE_CONTACT_EMAIL`, and
+  (optional) `VITE_CONTACT_LINKEDIN` environment variables, set in the Vercel
+  project for Production, Preview, and Development.
+
+### Custom domain (`irzazakaria.is-a.dev`)
+
+The custom domain is a free subdomain from [is-a.dev](https://www.is-a.dev),
+which works by adding `domains/irzazakaria.json` to the `is-a-dev/register`
+repository via a pull request. That file declares a `CNAME` record pointing to
+`cname.vercel-dns.com`, which Vercel then verifies and provisions a certificate
+for automatically.
+
