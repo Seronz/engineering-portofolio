@@ -37,18 +37,28 @@ export function AboutPage() {
 
       <Section
         title="Contact"
-        description="These are the only public contact points. Update them in the content source before publishing."
+        description="Public contact links are supplied at build time and never committed to the repository."
       >
-        <ul className={styles.list}>
-          {profile.contact.map((link) => (
-            <li key={link.href} className={styles.listItem}>
-              <a href={link.href} target="_blank" rel="noreferrer noopener">
-                {link.label}
-              </a>
-              {link.hint ? <span className={styles.hint}>{link.hint}</span> : null}
-            </li>
-          ))}
-        </ul>
+        {profile.contact.length > 0 ? (
+          <ul className={styles.list}>
+            {profile.contact.map((link) => (
+              <li key={link.href} className={styles.listItem}>
+                <a
+                  href={link.href}
+                  {...(link.href.startsWith('http')
+                    ? { target: '_blank', rel: 'noreferrer noopener' }
+                    : {})}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.hint}>
+            No public contact links are configured for this deployment.
+          </p>
+        )}
       </Section>
     </Page>
   )

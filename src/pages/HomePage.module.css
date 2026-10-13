@@ -153,7 +153,9 @@
   border-bottom: 1px solid var(--color-accent-dim);
 }
 
-.contactHint {
+.contactFallback {
+  max-width: var(--content-narrow);
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }

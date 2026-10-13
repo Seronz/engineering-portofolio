@@ -101,16 +101,27 @@ export function HomePage() {
       </Section>
 
       <Section id="contact" eyebrow="contact" title="Get in touch">
-        <ul className={styles.contact}>
-          {profile.contact.map((link) => (
-            <li key={link.href} className={styles.contactItem}>
-              <a href={link.href} target="_blank" rel="noreferrer noopener">
-                {link.label}
-              </a>
-              {link.hint ? <span className={styles.contactHint}>{link.hint}</span> : null}
-            </li>
-          ))}
-        </ul>
+        {profile.contact.length > 0 ? (
+          <ul className={styles.contact}>
+            {profile.contact.map((link) => (
+              <li key={link.href} className={styles.contactItem}>
+                <a
+                  href={link.href}
+                  {...(link.href.startsWith('http')
+                    ? { target: '_blank', rel: 'noreferrer noopener' }
+                    : {})}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.contactFallback}>
+            Public contact links are configured at build time and are not set for this
+            deployment.
+          </p>
+        )}
       </Section>
     </Page>
   )

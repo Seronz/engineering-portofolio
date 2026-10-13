@@ -14,8 +14,6 @@ export interface NavItem {
 export interface ContactLink {
   label: string
   href: string
-  /** Optional short description shown next to the link. */
-  hint?: string
 }
 
 export interface ExperienceEntry {
@@ -50,6 +48,32 @@ export const navigation: NavItem[] = [
   { label: 'About', to: '/about' },
 ]
 
+/**
+ * Public contact links, built from build-time environment variables so personal
+ * details stay out of version control. Values are provided as GitHub Actions
+ * repository variables (see README) or a local `.env` file. Anything missing is
+ * simply omitted from the site rather than replaced with a fake address.
+ */
+function buildContactLinks(): ContactLink[] {
+  const email = import.meta.env.VITE_CONTACT_EMAIL?.trim()
+  const github = import.meta.env.VITE_CONTACT_GITHUB?.trim()
+  const linkedin = import.meta.env.VITE_CONTACT_LINKEDIN?.trim()
+
+  const links: ContactLink[] = []
+
+  if (email) {
+    links.push({ label: 'Email', href: `mailto:${email}` })
+  }
+  if (github) {
+    links.push({ label: 'GitHub', href: github })
+  }
+  if (linkedin) {
+    links.push({ label: 'LinkedIn', href: linkedin })
+  }
+
+  return links
+}
+
 export const profile: Profile = {
   siteName: 'SERONZ',
   identity: 'SERONZ / SYSTEMS ENGINEERING',
@@ -83,17 +107,5 @@ export const profile: Profile = {
         'This entry is intentionally empty. Add only verified, non-confidential roles, dates, and outcomes here.',
     },
   ],
-  // TODO(owner): confirm these are the public contact points you want to publish.
-  contact: [
-    {
-      label: 'Email',
-      href: 'mailto:you@example.com',
-      hint: 'Replace with your public contact address.',
-    },
-    {
-      label: 'GitHub',
-      href: 'https://github.com/your-handle',
-      hint: 'Replace with your public profile.',
-    },
-  ],
+  contact: buildContactLinks(),
 }

@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -45,15 +45,22 @@ jobs:
         # BASE_URL must match the repository subpath on GitHub Pages, e.g.
         # /engineering-portofolio/. For a user/org site (<user>.github.io) or a
         # custom domain, change this to "/".
+        #
+        # Contact details come from repository variables
+        # (Settings -> Secrets and variables -> Actions -> Variables) so they
+        # are never committed. Unset variables simply hide that link.
         env:
           BASE_URL: /${{ github.event.repository.name }}/
+          VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL }}
+          VITE_CONTACT_GITHUB: ${{ vars.VITE_CONTACT_GITHUB }}
+          VITE_CONTACT_LINKEDIN: ${{ vars.VITE_CONTACT_LINKEDIN }}
         run: npm run build
 
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -66,4 +73,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

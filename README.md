@@ -59,6 +59,30 @@ in `src/content/` rather than the UI.
 are placeholders and must be replaced before the site goes public. Nothing is
 presented as finished unless it actually is.
 
+### Contact details (kept out of the repo)
+
+Public contact links are not stored in the repository. They are read from
+build-time environment variables, so the source can stay clean:
+
+| Variable                | Example                          |
+| ----------------------- | -------------------------------- |
+| `VITE_CONTACT_EMAIL`    | `name@example.com`               |
+| `VITE_CONTACT_GITHUB`   | `https://github.com/your-handle` |
+| `VITE_CONTACT_LINKEDIN` | `https://linkedin.com/in/you`    |
+
+Any variable that is unset is simply omitted — the site never shows a fake
+address.
+
+- **Locally:** copy `.env.example` to `.env` and fill it in (`.env` is
+  git-ignored).
+- **In CI:** add them under **Settings → Secrets and variables → Actions →
+  Variables** (the _Variables_ tab, since they are public). The workflow passes
+  them to the build.
+
+Note: environment variables avoid committing the values, but they are still
+inlined into the shipped site, where visitors can read them. Only put contact
+details you are happy to publish.
+
 ## Deploying to GitHub Pages
 
 The workflow at `.github/workflows/deploy.yml` builds, lints, type-checks, and
