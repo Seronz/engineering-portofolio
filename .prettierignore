@@ -1,0 +1,7 @@
+# Build output
+dist
+node_modules
+coverage
+
+# Package lock is generated; keep it in version control but out of Prettier
+package-lock.json

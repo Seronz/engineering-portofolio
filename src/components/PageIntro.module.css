@@ -1,0 +1,15 @@
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--content-narrow);
+}
+
+.title {
+  font-size: var(--text-2xl);
+}
+
+.lede {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,9 @@
+.page {
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}

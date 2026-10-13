@@ -1,0 +1,119 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-bg);
+  border-bottom: var(--border-hairline);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-4);
+  min-height: 4rem;
+  padding-block: var(--space-2);
+}
+
+.identity {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4ch;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.prompt {
+  color: var(--color-accent);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: transparent;
+  border: var(--border-hairline);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.toggle:hover {
+  border-color: var(--color-border-strong);
+}
+
+.toggleIcon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.nav {
+  display: none;
+  width: 100%;
+}
+
+.nav[data-open] {
+  display: block;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0 0 var(--space-2);
+  list-style: none;
+}
+
+.navLink {
+  display: block;
+  padding: var(--space-2) var(--space-2) var(--space-2) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.navLink:hover {
+  color: var(--color-text);
+}
+
+.navLinkActive {
+  color: var(--color-accent-strong);
+}
+
+@media (min-width: 48rem) {
+  .inner {
+    flex-wrap: nowrap;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .nav {
+    display: block;
+    width: auto;
+  }
+
+  .navList {
+    flex-direction: row;
+    gap: var(--space-5);
+    padding: 0;
+  }
+
+  .navLink {
+    padding: var(--space-1) 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .navLinkActive {
+    color: var(--color-accent-strong);
+    border-bottom-color: var(--color-accent-dim);
+  }
+}
