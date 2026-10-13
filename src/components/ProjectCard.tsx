@@ -1,5 +1,5 @@
-import type { Project } from '@/content/projects'
-import { statusLabels } from '@/content/projects'
+import type { Project } from '@/content/types'
+import { useContent } from '@/i18n/context'
 import styles from './ProjectCard.module.css'
 
 /**
@@ -8,12 +8,14 @@ import styles from './ProjectCard.module.css'
  * shipped work.
  */
 export function ProjectCard({ project }: { project: Project }) {
+  const { ui } = useContent()
+
   return (
     <article className={styles.card}>
       <div className={styles.head}>
         <h3 className={styles.name}>{project.name}</h3>
         <span className={styles.status} data-status={project.status}>
-          {statusLabels[project.status]}
+          {ui.status[project.status]}
         </span>
       </div>
 
@@ -21,17 +23,17 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <dl className={styles.meta}>
         <div className={styles.metaRow}>
-          <dt className={styles.metaTerm}>Problem</dt>
+          <dt className={styles.metaTerm}>{ui.problem}</dt>
           <dd className={styles.metaDetail}>{project.problem}</dd>
         </div>
         <div className={styles.metaRow}>
-          <dt className={styles.metaTerm}>Approach</dt>
+          <dt className={styles.metaTerm}>{ui.approach}</dt>
           <dd className={styles.metaDetail}>{project.approach}</dd>
         </div>
       </dl>
 
       {project.technologies.length > 0 ? (
-        <ul className={styles.tags} aria-label="Technologies">
+        <ul className={styles.tags} aria-label={ui.technologies}>
           {project.technologies.map((tech) => (
             <li key={tech} className={styles.tag}>
               {tech}
@@ -52,7 +54,7 @@ export function ProjectCard({ project }: { project: Project }) {
             ))}
           </ul>
         ) : (
-          <p className={styles.pending}>No public repository or write-up yet.</p>
+          <p className={styles.pending}>{ui.pendingRepo}</p>
         )}
       </div>
     </article>

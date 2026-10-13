@@ -2,7 +2,7 @@ import { Page } from '@/components/Page'
 import { PageIntro } from '@/components/PageIntro'
 import { Section } from '@/components/Section'
 import { NoteItem } from '@/components/NoteItem'
-import { notes } from '@/content/notes'
+import { useContent } from '@/i18n/context'
 import styles from './NotesPage.module.css'
 
 /**
@@ -10,17 +10,20 @@ import styles from './NotesPage.module.css'
  * published yet. Markdown rendering will be added when the first note is ready.
  */
 export function NotesPage() {
+  const content = useContent()
+  const { notesPage } = content.ui
+
   return (
     <Page>
       <PageIntro
-        eyebrow="notes"
-        title="Engineering notes"
-        lede="Technical write-ups on Linux networking, Kubernetes, Go concurrency, and reliability patterns. These are topics in progress, not published articles."
+        eyebrow={notesPage.eyebrow}
+        title={notesPage.title}
+        lede={notesPage.lede}
       />
 
-      <Section title="Index">
+      <Section title={notesPage.sectionTitle}>
         <ul className={styles.list}>
-          {notes.map((note) => (
+          {content.notes.map((note) => (
             <li key={note.slug}>
               <NoteItem note={note} />
             </li>
@@ -28,10 +31,7 @@ export function NotesPage() {
         </ul>
       </Section>
 
-      <p className={styles.notice}>
-        Individual note pages are planned. Nothing is marked published until it is
-        actually written.
-      </p>
+      <p className={styles.notice}>{notesPage.notice}</p>
     </Page>
   )
 }

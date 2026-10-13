@@ -1,16 +1,17 @@
-import { profile } from '@/content/profile'
+import { useContent } from '@/i18n/context'
 import styles from './Footer.module.css'
 
 export function Footer() {
+  const content = useContent()
   const year = new Date().getFullYear()
 
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
-        <span className={styles.identity}>{profile.identity}</span>
-        <span className={styles.note}>Static site — no trackers, no backend.</span>
+        <span className={styles.identity}>{content.identity}</span>
+        <span className={styles.note}>{content.ui.footerNote}</span>
         <span className={styles.copy}>
-          &copy; {year} {profile.siteName}
+          &copy; {year} {content.siteName}
         </span>
       </div>
     </footer>

@@ -2,7 +2,7 @@ import { Page } from '@/components/Page'
 import { PageIntro } from '@/components/PageIntro'
 import { Section } from '@/components/Section'
 import { ProjectCard } from '@/components/ProjectCard'
-import { projects } from '@/content/projects'
+import { useContent } from '@/i18n/context'
 import styles from './ProjectsPage.module.css'
 
 /**
@@ -10,26 +10,26 @@ import styles from './ProjectsPage.module.css'
  * yet. Content here is honest: nothing is presented as shipped.
  */
 export function ProjectsPage() {
+  const content = useContent()
+  const { projectsPage } = content.ui
+
   return (
     <Page>
       <PageIntro
-        eyebrow="projects"
-        title="Engineering projects"
-        lede="Case-study style write-ups of systems I am exploring. A project is only marked complete once it is implemented and tested."
+        eyebrow={projectsPage.eyebrow}
+        title={projectsPage.title}
+        lede={projectsPage.lede}
       />
 
-      <Section title="All projects">
+      <Section title={projectsPage.sectionTitle}>
         <div className={styles.list}>
-          {projects.map((project) => (
+          {content.projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </Section>
 
-      <p className={styles.notice}>
-        Individual project detail pages are planned. This route and the cards above
-        describe each project honestly; deeper write-ups will be added in a later change.
-      </p>
+      <p className={styles.notice}>{projectsPage.notice}</p>
     </Page>
   )
 }

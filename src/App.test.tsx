@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { App } from './App'
 
 function renderAt(path: string) {
@@ -12,6 +12,10 @@ function renderAt(path: string) {
 }
 
 describe('App routing', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+  })
+
   it('renders the home hero and primary navigation', () => {
     renderAt('/')
 
@@ -33,6 +37,20 @@ describe('App routing', () => {
     )
     expect(screen.getAllByText('Planned').length).toBeGreaterThan(0)
     expect(screen.queryByText('Completed')).not.toBeInTheDocument()
+  })
+
+  it('switches to Indonesian via the language toggle', () => {
+    renderAt('/')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Bahasa Indonesia' }))
+
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      'Saya mengerjakan sistem di balik perangkat lunak.',
+    )
+    expect(screen.getByRole('link', { name: 'Proyek' })).toHaveAttribute(
+      'href',
+      '/projects',
+    )
   })
 
   it('renders a not-found page for unknown routes', () => {

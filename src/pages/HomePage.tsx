@@ -3,28 +3,29 @@ import { Page } from '@/components/Page'
 import { Section } from '@/components/Section'
 import { ProjectCard } from '@/components/ProjectCard'
 import { NoteItem } from '@/components/NoteItem'
-import { profile } from '@/content/profile'
-import { projects } from '@/content/projects'
-import { notes } from '@/content/notes'
+import { useContent } from '@/i18n/context'
 import styles from './HomePage.module.css'
 
 const SELECTED_PROJECT_COUNT = 2
 const RECENT_NOTE_COUNT = 3
 
 export function HomePage() {
-  const selectedProjects = projects.slice(0, SELECTED_PROJECT_COUNT)
-  const recentNotes = notes.slice(0, RECENT_NOTE_COUNT)
+  const content = useContent()
+  const { ui } = content
+
+  const selectedProjects = content.projects.slice(0, SELECTED_PROJECT_COUNT)
+  const recentNotes = content.notes.slice(0, RECENT_NOTE_COUNT)
 
   return (
     <Page>
       <section className={styles.hero} aria-labelledby="hero-heading">
-        <p className="mono-label">{profile.identity}</p>
+        <p className="mono-label">{content.identity}</p>
         <h1 id="hero-heading" className={styles.headline}>
-          {profile.hero.headline}
+          {content.hero.headline}
         </h1>
-        <p className={styles.lede}>{profile.hero.lede}</p>
-        <ul className={styles.focus} aria-label="Focus areas">
-          {profile.focusAreas.map((area) => (
+        <p className={styles.lede}>{content.hero.lede}</p>
+        <ul className={styles.focus} aria-label={ui.focusAreas}>
+          {content.focusAreas.map((area) => (
             <li key={area} className={styles.focusItem}>
               {area}
             </li>
@@ -32,17 +33,21 @@ export function HomePage() {
         </ul>
         <div className={styles.actions}>
           <Link className={styles.primaryAction} to="/projects">
-            View projects
+            {ui.viewProjects}
           </Link>
           <Link className={styles.secondaryAction} to="/about">
-            About me
+            {ui.aboutMe}
           </Link>
         </div>
       </section>
 
-      <Section id="approach" eyebrow="approach" title={profile.approach.heading}>
+      <Section
+        id="approach"
+        eyebrow={ui.approachEyebrow}
+        title={content.approach.heading}
+      >
         <div className={styles.prose}>
-          {profile.approach.body.map((paragraph) => (
+          {content.approach.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
@@ -50,9 +55,9 @@ export function HomePage() {
 
       <Section
         id="projects"
-        eyebrow="selected work"
-        title="Selected projects"
-        description="A small set of engineering explorations. Status is shown as-is — most are still planned."
+        eyebrow={ui.selectedWorkEyebrow}
+        title={ui.selectedProjects.title}
+        description={ui.selectedProjects.description}
       >
         <div className={styles.projectList}>
           {selectedProjects.map((project) => (
@@ -60,15 +65,15 @@ export function HomePage() {
           ))}
         </div>
         <p className={styles.more}>
-          <Link to="/projects">All projects &rarr;</Link>
+          <Link to="/projects">{ui.allProjects} &rarr;</Link>
         </p>
       </Section>
 
       <Section
         id="notes"
-        eyebrow="writing"
-        title="Engineering notes"
-        description="Write-ups on Linux, Kubernetes, Go, and reliability work."
+        eyebrow={ui.writingEyebrow}
+        title={ui.notesSection.title}
+        description={ui.notesSection.description}
       >
         <ul className={styles.noteList}>
           {recentNotes.map((note) => (
@@ -78,13 +83,17 @@ export function HomePage() {
           ))}
         </ul>
         <p className={styles.more}>
-          <Link to="/notes">All notes &rarr;</Link>
+          <Link to="/notes">{ui.allNotes} &rarr;</Link>
         </p>
       </Section>
 
-      <Section id="experience" eyebrow="background" title="Experience">
+      <Section
+        id="experience"
+        eyebrow={ui.backgroundEyebrow}
+        title={ui.experienceSection.title}
+      >
         <ul className={styles.experience}>
-          {profile.experience.map((entry) => (
+          {content.experience.map((entry) => (
             <li key={`${entry.role}-${entry.period}`} className={styles.experienceItem}>
               <div className={styles.experienceHead}>
                 <h3 className={styles.experienceRole}>{entry.role}</h3>
@@ -96,14 +105,14 @@ export function HomePage() {
           ))}
         </ul>
         <p className={styles.more}>
-          <Link to="/about">More about my background &rarr;</Link>
+          <Link to="/about">{ui.moreAbout} &rarr;</Link>
         </p>
       </Section>
 
-      <Section id="contact" eyebrow="contact" title="Get in touch">
-        {profile.contact.length > 0 ? (
+      <Section id="contact" eyebrow={ui.contactEyebrow} title={ui.contactTitle}>
+        {content.contact.length > 0 ? (
           <ul className={styles.contact}>
-            {profile.contact.map((link) => (
+            {content.contact.map((link) => (
               <li key={link.href} className={styles.contactItem}>
                 <a
                   href={link.href}
@@ -117,10 +126,7 @@ export function HomePage() {
             ))}
           </ul>
         ) : (
-          <p className={styles.contactFallback}>
-            Public contact links are configured at build time and are not set for this
-            deployment.
-          </p>
+          <p className={styles.contactFallback}>{ui.contactFallback}</p>
         )}
       </Section>
     </Page>

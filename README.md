@@ -36,7 +36,8 @@ Run `npm run lint && npm run typecheck && npm run test` before committing.
 ```
 src/
   components/     Reusable UI (Header, Footer, Section, cards, layout)
-  content/        All editable site content — profile, projects, notes
+  content/        Editable site content — per-language dictionaries
+  i18n/           Language context, provider, and switch wiring
   pages/          One file per route
   styles/         Design tokens and global styles
   test/           Test setup
@@ -49,11 +50,24 @@ in `src/content/` rather than the UI.
 
 ## Editing content
 
-- `src/content/profile.ts` — identity, hero copy, approach, focus areas,
-  experience, and contact links.
-- `src/content/projects.ts` — projects, each with an honest `status`
-  (`planned` | `in-progress` | `completed`).
-- `src/content/notes.ts` — engineering notes index.
+The site is bilingual (English and Indonesian). Content is authored per
+language and must satisfy the shared `ContentDictionary` type, so a missing
+translation fails the type check instead of silently rendering blank.
+
+- `src/content/en.ts` — English content.
+- `src/content/id.ts` — Indonesian content.
+- `src/content/types.ts` — shared content types.
+- `src/content/index.ts` — language registry and `getContent(language)`.
+- `src/content/contact.ts` — contact links from environment variables.
+
+When you edit one language file, mirror the change in the other. Each file
+contains identity, hero copy, approach, focus areas, experience, navigation,
+projects, notes, and UI strings.
+
+The language switch (top-right) is a small context provider
+(`src/i18n/`). It stores the choice in `localStorage` and falls back to the
+browser language. No URL changes are involved, so it works unchanged on
+GitHub Pages.
 
 **Only publish verified, non-confidential information.** Fields marked `TODO`
 are placeholders and must be replaced before the site goes public. Nothing is
