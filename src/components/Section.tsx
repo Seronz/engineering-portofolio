@@ -3,22 +3,28 @@ import styles from './Section.module.css'
 
 interface SectionProps {
   id?: string
-  eyebrow?: string
+  label?: string
+  icon?: ReactNode
   title: string
   description?: string
   children: ReactNode
 }
 
 /**
- * A titled content section used across pages. The eyebrow is a small
- * monospace label (e.g. "selected work") that gives the page an
- * editorial/terminal rhythm without decorative noise.
+ * A titled content section. The label renders as a green pill — a small,
+ * monospace marker that gives the page an editorial/terminal rhythm without
+ * decorative noise. An optional icon sits inside the pill.
  */
-export function Section({ id, eyebrow, title, description, children }: SectionProps) {
+export function Section({ id, label, icon, title, description, children }: SectionProps) {
   return (
     <section id={id} className={styles.section}>
       <header className={styles.header}>
-        {eyebrow ? <p className="mono-label">{eyebrow}</p> : null}
+        {label ? (
+          <p className="pill">
+            {icon}
+            {label}
+          </p>
+        ) : null}
         <h2 className={styles.title}>{title}</h2>
         {description ? <p className={styles.description}>{description}</p> : null}
       </header>

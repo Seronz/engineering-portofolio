@@ -8,7 +8,8 @@ understand how systems behave when things go wrong.
 ## Stack
 
 - React + TypeScript (strict) built with Vite
-- React Router for the handful of routes the site needs
+- React Router for the single page and the not-found route
+- Lucide icons (`lucide-react`)
 - Plain CSS with CSS Modules and design tokens (`src/styles/tokens.css`)
 - ESLint + Prettier, Vitest + React Testing Library
 - GitHub Actions + GitHub Pages for free static hosting
@@ -35,10 +36,10 @@ Run `npm run lint && npm run typecheck && npm run test` before committing.
 
 ```
 src/
-  components/     Reusable UI (Header, Footer, Section, cards, layout)
+  components/     Reusable UI (Header, Footer, Section, layout)
   content/        Editable site content — per-language dictionaries
   i18n/           Language context, provider, and switch wiring
-  pages/          One file per route
+  pages/          HomePage and the not-found page
   styles/         Design tokens and global styles
   test/           Test setup
   App.tsx         Route definitions
@@ -50,9 +51,11 @@ in `src/content/` rather than the UI.
 
 ## Editing content
 
-The site is bilingual (English and Indonesian). Content is authored per
-language and must satisfy the shared `ContentDictionary` type, so a missing
-translation fails the type check instead of silently rendering blank.
+The site is a single page: a hero plus three capability sections (CORE OPS,
+PLATFORM LAB, INFRA) and a contact block. It is bilingual (English and
+Indonesian). Content is authored per language and must satisfy the shared
+`ContentDictionary` type, so a missing translation fails the type check instead
+of silently rendering blank.
 
 - `src/content/en.ts` — English content.
 - `src/content/id.ts` — Indonesian content.
@@ -61,17 +64,17 @@ translation fails the type check instead of silently rendering blank.
 - `src/content/contact.ts` — contact links from environment variables.
 
 When you edit one language file, mirror the change in the other. Each file
-contains identity, hero copy, approach, focus areas, experience, navigation,
-projects, notes, and UI strings.
+contains the hero copy, focus areas, the three capability sections, and UI
+strings. The header identity and footer text are intentionally identical in both
+files — they stay in English regardless of the selected language.
 
 The language switch (top-right) is a small context provider
 (`src/i18n/`). It stores the choice in `localStorage` and falls back to the
 browser language. No URL changes are involved, so it works unchanged on
 GitHub Pages.
 
-**Only publish verified, non-confidential information.** Fields marked `TODO`
-are placeholders and must be replaced before the site goes public. Nothing is
-presented as finished unless it actually is.
+**Only publish verified, non-confidential information.** Nothing is presented as
+finished unless it actually is.
 
 ### Contact details (kept out of the repo)
 

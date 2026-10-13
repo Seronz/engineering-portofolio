@@ -4,31 +4,29 @@
  * The whole visual identity lives here: colours, fonts, spacing, and type
  * scale. Components should reference these variables instead of hard-coding
  * values, so the palette can be tuned in one place.
+ *
+ * Palette: pure black background, white text, a single green accent used for
+ * labels/pills. Dark mode only — there is no light theme.
  */
 :root {
   color-scheme: dark;
 
-  /* Surfaces — charcoal / near-black */
-  --color-bg: #14161a;
-  --color-surface: #1a1d21;
-  --color-surface-raised: #20242a;
-  --color-border: #2b3036;
-  --color-border-strong: #3a4149;
+  /* Surfaces — pure black, with faintly raised panels */
+  --color-bg: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-raised: #121212;
+  --color-border: #1f1f1f;
+  --color-border-strong: #333333;
 
-  /* Text — warm off-white */
-  --color-text: #e8e4da;
-  --color-text-secondary: #b7b2a8;
-  --color-text-muted: #82807a;
+  /* Text — white on black */
+  --color-text: #ffffff;
+  --color-text-secondary: #b4b4b4;
+  --color-text-muted: #757575;
 
-  /* Accent — muted terminal green, used sparingly */
-  --color-accent: #8fb57f;
-  --color-accent-strong: #a9cd99;
-  --color-accent-dim: #3b4a36;
-
-  /* Status indicators */
-  --color-status-planned: #8b8378;
-  --color-status-progress: #c2a15e;
-  --color-status-complete: #8fb57f;
+  /* Accent — terminal green, used for pills and inline links */
+  --color-accent: #79c98a;
+  --color-accent-strong: #b7ecc3;
+  --color-accent-dim: #12291a;
 
   /* Typography */
   --font-sans:
@@ -59,11 +57,12 @@
   --space-9: 6.5rem;
 
   /* Layout */
-  --content-width: 68rem;
+  --content-width: 60rem;
   --content-narrow: 46rem;
 
   /* Misc */
   --radius: 4px;
+  --radius-pill: 999px;
   --border-hairline: 1px solid var(--color-border);
   --transition-fast: 120ms ease;
 }

@@ -85,6 +85,29 @@ button {
   color: var(--color-text-muted);
 }
 
+/* Utility: green pill label, used for section eyebrows and status badges */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  align-self: flex-start;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent-dim);
+  color: var(--color-accent-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.pill svg {
+  width: 0.9em;
+  height: 0.9em;
+}
+
 /* Utility: accessible, visually hidden text */
 .visually-hidden {
   position: absolute;

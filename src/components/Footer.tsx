@@ -5,6 +5,10 @@ import styles from './Footer.module.css'
 // the current date.
 const COPYRIGHT_YEAR = 2023
 
+/**
+ * Footer. Kept in English regardless of the selected language, per the site's
+ * design: the identity line and the "currently exploring" note never switch.
+ */
 export function Footer() {
   const content = useContent()
 
@@ -12,7 +16,7 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <span className={styles.identity}>{content.identity}</span>
-        <span className={styles.note}>{content.ui.footerNote}</span>
+        <span className={styles.note}>{content.ui.currentlyExploring}</span>
         <span className={styles.copy}>
           &copy; {COPYRIGHT_YEAR} {content.siteName}
         </span>

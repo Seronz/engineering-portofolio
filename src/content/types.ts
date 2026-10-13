@@ -1,120 +1,45 @@
 /**
  * Shared content types.
  *
- * Content is authored per language (see `src/content/en.ts` and
- * `src/content/id.ts`). Both files must satisfy `ContentDictionary`, so a
- * missing translation becomes a type error rather than an empty string at
- * runtime.
+ * The site is a single page. Content is authored per language (see
+ * `src/content/en.ts` and `src/content/id.ts`). Both files must satisfy
+ * `ContentDictionary`, so a missing translation becomes a type error rather
+ * than an empty string at runtime.
+ *
+ * The header identity and footer are intentionally English-only (the same
+ * strings are used in both dictionaries).
  */
 
 export type Language = 'en' | 'id'
-
-export interface NavItem {
-  label: string
-  to: string
-}
 
 export interface ContactLink {
   label: string
   href: string
 }
 
-export interface ExperienceEntry {
-  role: string
-  context: string
-  period: string
-  summary: string
+/** One bullet inside a capability section. `pill` renders it as a green badge. */
+export interface SectionItem {
+  text: string
+  pill?: boolean
 }
 
-export type ProjectStatus = 'planned' | 'in-progress' | 'completed'
-
-export interface ProjectLink {
+/** A capability block: a pill label, a heading, and a list of points. */
+export interface ContentSection {
+  id: string
   label: string
-  href: string
-}
-
-export interface Project {
-  slug: string
-  name: string
-  summary: string
-  problem: string
-  approach: string
-  status: ProjectStatus
-  technologies: string[]
-  links: ProjectLink[]
-}
-
-export type NoteStatus = 'planned' | 'draft' | 'published'
-
-export interface Note {
-  slug: string
   title: string
-  summary: string
-  tags: string[]
-  status: NoteStatus
-  date: string
-}
-
-export interface Certification {
-  name: string
-  status: string
+  items: SectionItem[]
 }
 
 /** Labels and short copy used by the UI chrome rather than by content data. */
 export interface UiStrings {
   skipToContent: string
-  navLabel: string
-  openMenu: string
-  closeMenu: string
   languageGroupLabel: string
   focusAreas: string
-  technologies: string
-  tags: string
-  problem: string
-  approach: string
-  status: Record<ProjectStatus, string>
-  noteStatus: Record<NoteStatus, string>
-  pendingRepo: string
-  viewProjects: string
-  aboutMe: string
-  allProjects: string
-  allNotes: string
-  moreAbout: string
-  approachEyebrow: string
-  selectedWorkEyebrow: string
-  writingEyebrow: string
-  backgroundEyebrow: string
   contactEyebrow: string
   contactTitle: string
   contactFallback: string
-  noContact: string
-  footerNote: string
-  certificationsTitle: string
-  selectedProjects: { title: string; description: string }
-  notesSection: { title: string; description: string }
-  experienceSection: { title: string }
-  projectsPage: {
-    eyebrow: string
-    title: string
-    lede: string
-    sectionTitle: string
-    notice: string
-  }
-  notesPage: {
-    eyebrow: string
-    title: string
-    lede: string
-    sectionTitle: string
-    notice: string
-  }
-  aboutPage: {
-    eyebrow: string
-    title: string
-    lede: string
-    focusTitle: string
-    contactTitle: string
-    contactDescription: string
-  }
+  currentlyExploring: string
   notFound: { code: string; title: string; body: string; link: string }
 }
 
@@ -122,15 +47,9 @@ export interface UiStrings {
 export interface ContentDictionary {
   siteName: string
   identity: string
-  tagline: string
   hero: { headline: string; lede: string }
-  approach: { heading: string; body: string[] }
   focusAreas: string[]
-  experience: ExperienceEntry[]
-  nav: NavItem[]
-  projects: Project[]
-  notes: Note[]
-  certifications: Certification[]
+  sections: ContentSection[]
   ui: UiStrings
 }
 
