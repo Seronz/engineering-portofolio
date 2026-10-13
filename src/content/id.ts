@@ -4,8 +4,8 @@ import type { ContentDictionary } from './types'
  * Indonesian content. Must mirror the shape of `src/content/en.ts`.
  */
 export const id: ContentDictionary = {
-  siteName: 'SERONZ',
-  identity: 'SERONZ / REKAYASA SISTEM',
+  siteName: 'Irza Zakaria',
+  identity: 'IRZA ZAKARIA / REKAYASA SISTEM',
   tagline: 'Saya mengerjakan sistem di balik perangkat lunak.',
   hero: {
     headline: 'Saya mengerjakan sistem di balik perangkat lunak.',
@@ -117,6 +117,7 @@ export const id: ContentDictionary = {
       date: '',
     },
   ],
+  certifications: [{ name: 'CKAD', status: 'Sedang Dikerjakan' }],
   ui: {
     skipToContent: 'Lewati ke konten',
     navLabel: 'Navigasi utama',
@@ -154,6 +155,7 @@ export const id: ContentDictionary = {
       'Tautan kontak publik dikonfigurasi saat build dan belum diatur untuk deployment ini.',
     noContact: 'Belum ada tautan kontak publik yang dikonfigurasi untuk deployment ini.',
     footerNote: 'Situs statis — tanpa pelacak, tanpa backend.',
+    certificationsTitle: 'Sertifikasi',
     selectedProjects: {
       title: 'Proyek pilihan',
       description:

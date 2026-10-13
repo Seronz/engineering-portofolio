@@ -39,6 +39,16 @@ export function AboutPage() {
         </ul>
       </Section>
 
+      <Section title={ui.certificationsTitle}>
+        <ul className={styles.list}>
+          {content.certifications.map((certification) => (
+            <li key={certification.name} className={styles.listItem}>
+              {certification.name} — {certification.status}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       <Section title={aboutPage.contactTitle} description={aboutPage.contactDescription}>
         {content.contact.length > 0 ? (
           <ul className={styles.list}>

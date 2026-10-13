@@ -55,6 +55,11 @@ export interface Note {
   date: string
 }
 
+export interface Certification {
+  name: string
+  status: string
+}
+
 /** Labels and short copy used by the UI chrome rather than by content data. */
 export interface UiStrings {
   skipToContent: string
@@ -84,6 +89,7 @@ export interface UiStrings {
   contactFallback: string
   noContact: string
   footerNote: string
+  certificationsTitle: string
   selectedProjects: { title: string; description: string }
   notesSection: { title: string; description: string }
   experienceSection: { title: string }
@@ -124,6 +130,7 @@ export interface ContentDictionary {
   nav: NavItem[]
   projects: Project[]
   notes: Note[]
+  certifications: Certification[]
   ui: UiStrings
 }
 

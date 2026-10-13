@@ -5,8 +5,8 @@ import type { ContentDictionary } from './types'
  * must satisfy `ContentDictionary`.
  */
 export const en: ContentDictionary = {
-  siteName: 'SERONZ',
-  identity: 'SERONZ / SYSTEMS ENGINEERING',
+  siteName: 'Irza Zakaria',
+  identity: 'IRZA ZAKARIA / SYSTEMS ENGINEERING',
   tagline: 'I work on the systems behind the software.',
   hero: {
     headline: 'I work on the systems behind the software.',
@@ -118,6 +118,7 @@ export const en: ContentDictionary = {
       date: '',
     },
   ],
+  certifications: [{ name: 'CKAD', status: 'In Progress' }],
   ui: {
     skipToContent: 'Skip to content',
     navLabel: 'Primary',
@@ -155,6 +156,7 @@ export const en: ContentDictionary = {
       'Public contact links are configured at build time and are not set for this deployment.',
     noContact: 'No public contact links are configured for this deployment.',
     footerNote: 'Static site — no trackers, no backend.',
+    certificationsTitle: 'Certifications',
     selectedProjects: {
       title: 'Selected projects',
       description:
